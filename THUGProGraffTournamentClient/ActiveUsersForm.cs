@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -39,6 +40,25 @@ namespace THUGProGraffTournamentClient
             {
                 updateActiveUsersList(snapshot);
             });
+        }
+
+        public void queryResetAll()
+        {
+            Query query = mainForm.db.Collection("Users").WhereEqualTo("Reset", true);
+
+            FirestoreChangeListener listender = query.Listen(snapshot =>
+            {
+                mainForm.maxTags = 0;
+                mainForm.tagCount = 0;
+
+                DocumentReference docref = this.mainForm.db.Collection("Users").Document(this.mainForm.username);
+                Dictionary<string, object> data = new Dictionary<string, object>()
+                {
+                    { "Reset", false }
+                };
+                docref.UpdateAsync(data); ;
+            });
+
         }
 
         public void updateActiveUsersList(QuerySnapshot snapshot)
@@ -97,6 +117,54 @@ namespace THUGProGraffTournamentClient
             {
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void userListBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control)
+                switch (e.KeyCode)
+                {
+                    case Keys.R:
+                        resetAll();
+                        break;
+                    case Keys.Delete:
+                        removePlayers();
+                        break;
+                }
+        }
+
+        private void removePlayers()
+        {
+            var selectedItems = userListBox.SelectedItems;
+            foreach (var selectedItem in selectedItems)
+            {
+                var username = selectedItem.ToString();
+                username = Regex.Replace(username, ":.*", "");
+                DocumentReference docref = this.mainForm.db.Collection("Users").Document(username);
+                Dictionary<string, object> data = new Dictionary<string, object>()
+                {
+                    { "Active", false }
+                };
+                docref.UpdateAsync(data);
+            }
+            userListBox.Items.Remove(selectedItems);
+        }
+
+        private async void resetAll()
+        {
+            Query allUsersQuery = this.mainForm.db.Collection("Users");
+            QuerySnapshot allUsersSnapshot = await allUsersQuery.GetSnapshotAsync();
+            foreach (DocumentSnapshot docSnap in allUsersSnapshot.Documents)
+            {
+                DocumentReference docref = docSnap.Reference;
+                Dictionary<string, object> data = new Dictionary<string, object>()
+                {
+                    { "MaxTags", 0 },
+                    { "Reset", true }
+                };
+
+                await docref.UpdateAsync(data);
             }
         }
     }

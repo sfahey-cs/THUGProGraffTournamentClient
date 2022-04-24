@@ -57,7 +57,6 @@
             this.label3.Size = new System.Drawing.Size(147, 37);
             this.label3.TabIndex = 4;
             this.label3.Text = "Tag Count";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             this.label3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Any_MouseClick);
             this.label3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Any_MouseDown);
             // 
@@ -72,7 +71,6 @@
             this.label4.Size = new System.Drawing.Size(33, 37);
             this.label4.TabIndex = 5;
             this.label4.Text = "0";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             this.label4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Any_MouseClick);
             this.label4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Any_MouseDown);
             // 
@@ -87,7 +85,6 @@
             this.label6.Size = new System.Drawing.Size(138, 37);
             this.label6.TabIndex = 8;
             this.label6.Text = "Max Tags";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             this.label6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Any_MouseClick);
             this.label6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Any_MouseDown);
             // 
@@ -102,7 +99,6 @@
             this.maxTagsCounter.Size = new System.Drawing.Size(33, 37);
             this.maxTagsCounter.TabIndex = 9;
             this.maxTagsCounter.Text = "0";
-            this.maxTagsCounter.Click += new System.EventHandler(this.maxTagsCounter_Click);
             this.maxTagsCounter.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Any_MouseClick);
             this.maxTagsCounter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Any_MouseDown);
             // 

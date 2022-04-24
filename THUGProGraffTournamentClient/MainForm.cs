@@ -1,20 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Memory;
 using System.Threading;
-using System.Collections;
 using System.Diagnostics;
-using System.Security.Principal;
 using Google.Cloud.Firestore;
-using System.IO;
-using Google.Cloud.Firestore.V1;
 
 namespace THUGProGraffTournamentClient
 {
@@ -42,8 +33,8 @@ namespace THUGProGraffTournamentClient
         }
 
         bool procOpen = false;
-        int tagCount = 0;
-        int maxTags = 0;
+        public int tagCount = 0;
+        public int maxTags = 0;
 
         private async void bgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -65,10 +56,9 @@ namespace THUGProGraffTournamentClient
                     tagCount = tempTagCount;
                 }
 
-
                 procOpen = true;
+                Thread.Sleep(100);
 
-                Thread.Sleep(10);
                 try
                 {
                     bgWorker.ReportProgress(0);
@@ -113,36 +103,6 @@ namespace THUGProGraffTournamentClient
         }
 
         private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void maxTagsCounter_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void procOpenLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
         {
 
         }

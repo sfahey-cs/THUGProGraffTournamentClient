@@ -65,11 +65,13 @@ namespace THUGProGraffTournamentClient
                 { "Username", this.mainForm.username },
                 { "Password", "hunter1" },
                 { "MaxTags", 0 },
-                { "Active", true }
+                { "Active", true },
+                { "Reset", false }
             };
             doc.SetAsync(data);
             this.mainForm.loggedIn = true;
             this.mainForm.activeUsers.queryActiveUsersList();
+            this.mainForm.activeUsers.queryResetAll();
             this.mainForm.activeUsers.Show();
             this.Hide();
         }

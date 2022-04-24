@@ -40,8 +40,10 @@
             this.userListBox.Location = new System.Drawing.Point(12, 12);
             this.userListBox.Name = "userListBox";
             this.userListBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.userListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.userListBox.Size = new System.Drawing.Size(233, 411);
             this.userListBox.TabIndex = 0;
+            this.userListBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.userListBox_KeyDown);
             this.userListBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Any_MouseDown);
             // 
             // ActiveUsersForm
